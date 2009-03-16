@@ -3,10 +3,11 @@
     = converted
 
 %form{:action => "/when", :method => "POST"}
-  %input{:type => "text", :name => "q", :value => q || "2pm MDT in CET"}
+  %input{:type => "text", :name => "q", :value => q || "2pm MDT in CET"}/
+  %input{:type => "hidden", :name => "zone", :value => ""}/
 
 %p
-  Enter a conversion using google conversion syntax. Example pre-filled. 
+  Enter a conversion using google conversion syntax. Example pre-filled.
 %p
   %span.time
     {time} 
