@@ -16,6 +16,10 @@ class WhenIsThat < Sinatra::Base
     sass 'sass/whenisthat'.to_sym
   end
 
+  get '/about' do
+    haml :about
+  end
+
   post '/when' do
     converted = nil
     begin
