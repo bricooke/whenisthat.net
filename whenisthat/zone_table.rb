@@ -164,7 +164,7 @@ class WhenIsThat < Sinatra::Base
       MAPPING.keys.each do |city|
         return MAPPING[city] if city.downcase == zone.to_s.downcase || city.downcase.include?("/" + zone.to_s.downcase)
       end
-      zone
+      zone.to_s.humanize
     end
   end
 end
