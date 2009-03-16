@@ -1,0 +1,21 @@
+set :application, "whenisthat.net"
+set :repository,  "git://github.com/bricooke/whenisthat.net.git"
+
+set :deploy_to, "/var/www/someplace"
+
+# If you aren't using Subversion to manage your source code, specify
+# your SCM below:
+set :scm, 'git'
+set :user, 'www-data'
+set :use_sudo, false
+
+role :app, "whenisthat.net"
+role :web, "whenisthat.net"
+role :db,  "whenisthat.net", :primary => true
+
+desc "Restart the passenger instances."
+namespace :deploy do
+  task :restart, :roles => :app do
+    run "touch #{deploy_to}/current/tmp/restart.txt"
+  end
+end

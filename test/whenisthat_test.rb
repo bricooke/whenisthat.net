@@ -38,6 +38,11 @@ class WhenIsThatTest < Test::Unit::TestCase
     assert last_response.body[0].include?("21:00 CET")
   end
 
+  def test_to_instead_of_in
+    post '/when', :q => "2pm Denver to CET"
+    assert last_response.body[0].include?("21:00 CET")
+  end
+
   def test_unknown_destination
     post '/when', :q => "2pm MDT in CEE"
     assert last_response.ok?

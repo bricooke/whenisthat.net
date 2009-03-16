@@ -18,7 +18,7 @@ class WhenIsThat < Sinatra::Base
 
   post '/when' do
     begin
-      time, from_zone, to_zone = params["q"].scan(/(.*) (.*) in (.*)/i)[0]
+      time, from_zone, to_zone = params["q"].scan(/(.*) (.*) [in|to]* (.*)/i)[0]
 
       from_zone = from_zone.downcase
       to_zone = to_zone.downcase
