@@ -19,11 +19,12 @@ class WhenIsThat < Sinatra::Base
   post '/when' do
     converted = nil
     begin
-      time, from_zone, to_zone = params["q"].scan(/(.*) (.*) [in|to]* (.*)/i)[0]
+      time, from_zone, to_zone = params["q"].scan(/(\S+)\s+(\S+)\s+[in|to]+\s+(\S+)/i)[0]
 
       # try support for 2pm MDT and use the browser default
       if time.nil?
-        time, from_zone = params["q"].scan(/(.*) (.*)/i)[0]
+        time, from_zone = params["q"].scan(/(\S+)\s+(\S+)/i)[0]
+        time = cleanup_time(time)
         offset = params["zone"].to_f
 
         Time.zone = ZoneTable.zone_to_city(from_zone.downcase.to_sym)
@@ -32,8 +33,8 @@ class WhenIsThat < Sinatra::Base
         offset += Time.zone.utc_offset.to_f/60.0/60.0
 
         converted = (Time.zone.parse(time) - offset.hours).strftime("%H:%M") + " your time"
-        puts converted
       else
+        time = cleanup_time(time)
         from_zone = from_zone.downcase
         to_zone = to_zone.downcase
 
@@ -49,6 +50,15 @@ class WhenIsThat < Sinatra::Base
       converted = nil
     end
     haml :index, :locals => {:q => params["q"], :converted => (converted.nil? ? "Whoops. I don't understand." : converted)}
+  end
+
+  protected
+  def cleanup_time(time)
+    time = time.downcase
+    if time.scan(/[a|p][\.]*m[\.]*/).empty? && !time.include?(":")
+      time = time + ":00"
+    end
+    time
   end
 end
 

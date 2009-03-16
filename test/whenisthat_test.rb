@@ -39,13 +39,31 @@ class WhenIsThatTest < Test::Unit::TestCase
   end
 
   def test_submitted_zone
-    post '/when', :q => "2pm CET", :zone => "6"
+    submit("2pm CET", "6")
     assert last_response.body[0].include?("07:00")
+  end
+
+  def test_non_o_clock
+    submit("2 CET in MDT")
+    assert last_response.body[0].include?("19:00 MDT")
   end
 
   def test_to_instead_of_in
     post '/when', :q => "2pm Denver to CET"
     assert last_response.body[0].include?("21:00 CET")
+  end
+
+  def test_whitespace
+    submit("2pm   MDT    in    CET")
+    assert last_response.body[0].include?("21:00 CET")
+
+    submit("2pm    CET", "6")
+    assert last_response.body[0].include?("07:00")
+  end
+
+  def test_dots_in_pm
+    submit("2p.m. CET", "6")
+    assert last_response.body[0].include?("07:00")
   end
 
   def test_unknown_destination
@@ -58,5 +76,9 @@ class WhenIsThatTest < Test::Unit::TestCase
     post '/when', :q => "2pm Garbage in CET"
     assert last_response.ok?
     assert last_response.body[0].include?("Whoops")
+  end
+
+  def submit(q, zone = "")
+    post '/when', :q => q, :zone => zone
   end
 end
