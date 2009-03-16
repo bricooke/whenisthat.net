@@ -1,5 +1,6 @@
-%p.result
-  = converted unless converted.nil?
+- if !converted.nil?
+  %p.result
+    = converted
 
 %form{:action => "/when", :method => "POST"}
   %input{:type => "text", :name => "q", :value => q || "2pm MDT in CET"}
