@@ -1,0 +1,16 @@
+= converted unless converted.nil?
+
+%form{:action => "/when", :method => "POST"}
+  %input{:type => "text", :name => "q", :value => q || "2pm MDT in CET"}
+
+%p
+  Enter a conversion using google conversion syntax. Example pre-filled. 
+%p
+  %span.time
+    {time} 
+  %span.from
+    {from zone or city} 
+  in 
+  %span.to
+    {to zone or city}
+
