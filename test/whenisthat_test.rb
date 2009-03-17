@@ -2,13 +2,12 @@ require 'rubygems'
 require 'test/unit'
 require 'rack/test'
 require 'whenisthat.rb'
-require 'whenisthat/zone_table.rb'
 
 class WhenIsThatTest < Test::Unit::TestCase
   include Rack::Test::Methods
 
   def app
-    WhenIsThat.new
+    WhenIsThat::Base.new
   end
 
   def test_loads_initial_page
