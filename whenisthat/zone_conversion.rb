@@ -162,16 +162,18 @@ module WhenIsThat
       begin
         time, from_zone, to_zone = in_string.scan(/(\S+)\s+(\S+)\s+[in|to]+\s+(\S+)/i)[0]
 
+        # try support for 2pm in Chicago and use the browser
+        # or
         # try support for 2pm MDT and use the browser default
         if time.nil?
-          time, from_zone = in_string.scan(/(\S+)\s+(\S+)/i)[0]
+          time, from_zone = in_string.scan(/(\S+)\s+[in|\s+]*(\S+)/i)[0]
           time = cleanup_time(time)
           offset = zone.to_f
 
           Time.zone = ZoneConversion.zone_to_city(from_zone.downcase.to_sym)
           raise "unknown city #{from_zone}" if Time.zone.nil?
 
-          offset += Time.zone.utc_offset.to_f/60.0/60.0
+          offset += (Time.zone.now.utc_offset.to_f/60.0/60.0)
 
           converted = (Time.zone.parse(time) - offset.hours).strftime("%H:%M") + " your time"
         else

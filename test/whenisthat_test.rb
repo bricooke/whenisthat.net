@@ -70,6 +70,11 @@ class WhenIsThatTest < Test::Unit::TestCase
     assert last_response.body[0].include?("21:00 CST")
   end
 
+  def test_alternative_syntax
+    submit("2pm in CDT", "6")
+    assert last_response.body[0].include?("13:00")
+  end
+
   def test_unknown_destination
     post '/when', :q => "2pm MDT in CEE"
     assert last_response.ok?
