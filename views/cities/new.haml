@@ -1,0 +1,15 @@
+Tell me about the city or time zone abbreviation you'd like to see supported.
+
+%form.city{:action => "/cities", :method => "POST"}
+  %p
+    %label{:for => "name"}City
+    %input{:type => "text", :name => "name"}/
+  %p
+    %label{:for => "from_email"}
+      Your email (optional)
+      %small so I can let you know when it's done. I won't do anything else with it.
+    %input{:type => "text", :name => "from_email"}/
+  %p
+    %input{:type => "submit", :value => "Submit"}/
+    or
+    %a{:href=>"/"}cancel

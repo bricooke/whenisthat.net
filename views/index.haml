@@ -1,5 +1,6 @@
-- if !converted.nil?
+- if !converted.nil? || !flash[:notice].nil?
   %p.result
+    = flash[:notice]
     = converted
 
 %form{:action => "/when", :method => "POST"}
@@ -34,10 +35,13 @@
     {to zone or city}
 
 %p.missing
-  Find a missing city or abbreviation, there are currently lots :(  Help make When Is That better by telling me about it. Just shoot me an
+  Find a missing city or abbreviation, there are currently lots :(  Help make When Is That better by 
+  %a{:href => "/cities/new"}
+    telling me
+  about it. You can also shoot me an
   %a{:href => "mailto:whenisthat@roobasoft.com?subject=When%20is%20that"}
     email
-
+  if you'd like.
 
 
 %a{:href => "/about"}

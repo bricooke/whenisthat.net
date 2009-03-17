@@ -1,3 +1,5 @@
+require 'whenisthat/city'
+
 module WhenIsThat
   class ZoneConversion
     ZONES = {
