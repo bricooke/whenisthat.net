@@ -174,8 +174,8 @@ module WhenIsThat
           raise "unknown city #{from_zone}" if Time.zone.nil?
 
           offset += (Time.zone.now.utc_offset.to_f/60.0/60.0)
-
-          converted = (Time.zone.parse(time) - offset.hours).strftime("%H:%M") + " your time"
+          converted = (Time.zone.parse(time) - offset.hours)
+          converted = converted.strftime("%H:%M") + " or " + converted.strftime("%I:%M%p") + " your time"
         else
           time = cleanup_time(time)
           from_zone = from_zone.downcase
@@ -185,7 +185,8 @@ module WhenIsThat
             Time.zone = ZoneConversion.zone_to_city(zone.downcase.to_sym)
             raise "unknown city #{zone}" if Time.zone.nil?
           end
-          converted = Time.zone.parse(time).in_time_zone(ZoneConversion.zone_to_city(to_zone.to_sym)).strftime("%H:%M %Z")
+          converted =  Time.zone.parse(time).in_time_zone(ZoneConversion.zone_to_city(to_zone.to_sym))
+          converted = converted.strftime("%H:%M") + " or " + converted.strftime("%I:%M%p %Z")
         end
 
         converted = "That would be " + converted

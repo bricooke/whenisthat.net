@@ -7,18 +7,34 @@
   %input{:type => "hidden", :name => "zone", :value => ""}/
 
 %p
-  Enter a conversion using google conversion syntax. Example pre-filled.
+  Enter a conversion using google conversion syntax.
+%code
+  Examples:
+  %br/
+  2pm MDT in CET => "21:00"
+  %br/
+  2pm MDT in CDT => "15:00"
+  %br/
+  2pm in Chicago => "13:00" 
+  %br/
+  \# the above converts from 2pm Chicago time to your local time
+  %br/
+  %br/
+  2pm Chicago   => "13:00"
+  %br/
+  \# again, uses your local time
+
 %p
   %span.time
-    {time} 
+    {time}
   %span.from
-    {from zone or city} 
-  in 
+    {from zone or city}
+  in
   %span.to
     {to zone or city}
 
 %p.missing
-  Find a missing city or abbreviation, there are currently lots :(  Help make When Is That better by telling me about it. Just shoot me an 
+  Find a missing city or abbreviation, there are currently lots :(  Help make When Is That better by telling me about it. Just shoot me an
   %a{:href => "mailto:whenisthat@roobasoft.com?subject=When%20is%20that"}
     email
 
