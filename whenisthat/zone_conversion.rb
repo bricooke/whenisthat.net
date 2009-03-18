@@ -29,6 +29,7 @@ module WhenIsThat
       "SF" =>                                     "Pacific Time (US & Canada)"   ,
       "Austin" =>                                 "Central Time (US & Canada)"   ,
       "New Zealand" =>                            "Auckland"                     ,
+      "Japan" =>                                  "Tokyo"                        ,      
       "Pacific/Midway" =>                         "International Date Line West" ,
       "Pacific/Midway" =>                         "Midway Island"                ,
       "Pacific/Pago_Pago" =>                      "Samoa"                        ,
