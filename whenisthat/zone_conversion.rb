@@ -16,7 +16,8 @@ module WhenIsThat
       :west => "Lisbon",
       :nzdt => "Auckland",
       :nzst => "Auckland",
-      :nzt => "Auckland"
+      :nzt => "Auckland",
+      :jst => "Tokyo"
     }
 
     # mostly stolen from http://dev.rubyonrails.org/svn/rails/plugins/tzinfo_timezone/lib/tzinfo_timezone.rb
