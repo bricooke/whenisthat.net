@@ -11,9 +11,7 @@ module WhenIsThat
       :cst => "Central Time (US & Canada)",
       :edt => "Eastern Time (US & Canada)",
       :est => "Eastern Time (US & Canada)",
-      :cet => "Madrid",
-      :gmt => "Dublin",
-      :utc => "Dublin"
+      :cet => "Madrid"
     }
 
     # stolen from http://dev.rubyonrails.org/svn/rails/plugins/tzinfo_timezone/lib/tzinfo_timezone.rb
@@ -205,6 +203,12 @@ module WhenIsThat
       MAPPING.keys.each do |city|
         return MAPPING[city] if city.downcase == zone.to_s.downcase || city.downcase.include?("/" + zone.to_s.downcase)
       end
+
+      # handle utc and gmt special
+      if zone.to_s.downcase == "gmt" || zone.to_s.downcase == "utc"
+        return "UTC"
+      end
+
       zone.to_s.humanize
     end
 
