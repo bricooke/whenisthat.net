@@ -11,7 +11,9 @@ module WhenIsThat
       :cst => "Central Time (US & Canada)",
       :edt => "Eastern Time (US & Canada)",
       :est => "Eastern Time (US & Canada)",
-      :cet => "Madrid"
+      :cet => "Madrid",
+      :gmt => "Dublin",
+      :utc => "Dublin"
     }
 
     # stolen from http://dev.rubyonrails.org/svn/rails/plugins/tzinfo_timezone/lib/tzinfo_timezone.rb
