@@ -11,12 +11,23 @@ module WhenIsThat
       :cst => "Central Time (US & Canada)",
       :edt => "Eastern Time (US & Canada)",
       :est => "Eastern Time (US & Canada)",
-      :cet => "Madrid"
+      :cet => "Madrid",
+      :wet => "Lisbon",
+      :west => "Lisbon",
+      :nzdt => "Auckland",
+      :nzst => "Auckland",
+      :nzt => "Auckland"
     }
 
-    # stolen from http://dev.rubyonrails.org/svn/rails/plugins/tzinfo_timezone/lib/tzinfo_timezone.rb
+    # mostly stolen from http://dev.rubyonrails.org/svn/rails/plugins/tzinfo_timezone/lib/tzinfo_timezone.rb
     # and reversed for my purposes. feels like i'm doing it wrong :/
     MAPPING = {
+      "Boston" =>                                 "Eastern Time (US & Canada)"   ,
+      "New York" =>                               "Eastern Time (US & Canada)"   ,
+      "San Francisco" =>                          "Pacific Time (US & Canada)"   ,
+      "SF" =>                                     "Pacific Time (US & Canada)"   ,
+      "Austin" =>                                 "Central Time (US & Canada)"   ,
+      "New Zealand" =>                            "Auckland"                     ,
       "Pacific/Midway" =>                         "International Date Line West" ,
       "Pacific/Midway" =>                         "Midway Island"                ,
       "Pacific/Pago_Pago" =>                      "Samoa"                        ,
@@ -162,13 +173,13 @@ module WhenIsThat
 
     def self.convert(in_string, zone="")
       begin
-        time, from_zone, to_zone = in_string.scan(/(\S+)\s+(\S+)\s+[in|to]+\s+(\S+)/i)[0]
+        time, from_zone, to_zone = in_string.scan(/(\S+)\s+([\S\s]+)\s+[in|to]+\s+([\S\s]+)/i)[0]
 
         # try support for 2pm in Chicago and use the browser
         # or
         # try support for 2pm MDT and use the browser default
         if time.nil?
-          time, from_zone = in_string.scan(/(\S+)\s+[in|\s+]*(\S+)/i)[0]
+          time, from_zone = in_string.scan(/(\S+)\s+[in|\s+]*([\S\s]+)/i)[0]
           time = cleanup_time(time)
           offset = zone.to_f
 
