@@ -10,8 +10,6 @@
     %script{:type => "text/javascript", :src => "/whenisthat.js"}
       
   %body
-    = yield
-    
     <script type="text/javascript"><!--
     google_ad_client = "pub-5117103821008928";
     /* 728x90, created 6/8/09 */
@@ -24,6 +22,9 @@
     src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
     </script>
 
+
+    = yield
+    
     
     <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
