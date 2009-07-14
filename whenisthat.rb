@@ -14,7 +14,12 @@ module WhenIsThat
     set :static, true
 
     get '/' do
-      haml :index, :locals => {:converted => nil, :q => nil}
+      if (params["q"])
+        converted = ZoneConversion.convert(params["q"], params["zone"])
+        haml :index, :locals => {:q => params["q"], :converted => (converted.nil? ? "Whoops. I don't understand." : converted)}
+      else
+        haml :index, :locals => {:converted => nil, :q => nil}
+      end
     end
 
     get '/about' do
