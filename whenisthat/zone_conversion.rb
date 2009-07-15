@@ -39,6 +39,8 @@ module WhenIsThat
       "America/Los_Angeles" =>                    "Pacific Time (US & Canada)"   ,
       "America/Tijuana" =>                        "Tijuana"                      ,
       "America/Denver" =>                         "Mountain Time (US & Canada)"  ,
+      "Salt Lake City" =>                         "Mountain Time (US & Canada)"  ,
+      "SLC" =>                                    "Mountain Time (US & Canada)"  ,
       "America/Phoenix" =>                        "Arizona"                      ,
       "America/Chihuahua" =>                      "Chihuahua"                    ,
       "America/Mazatlan" =>                       "Mazatlan"                     ,
@@ -215,7 +217,7 @@ module WhenIsThat
     def self.zone_to_city(zone)
       return ZONES[zone] unless ZONES[zone].nil?
       MAPPING.keys.each do |city|
-        return MAPPING[city] if city.downcase == zone.to_s.downcase || city.downcase.include?("/" + zone.to_s.downcase)
+        return MAPPING[city] if city.downcase == zone.to_s.downcase || city.downcase.include?("/" + zone.to_s.gsub(" ", "_").downcase)
       end
 
       # handle utc and gmt special
