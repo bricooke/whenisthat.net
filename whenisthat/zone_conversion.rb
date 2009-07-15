@@ -215,7 +215,6 @@ module WhenIsThat
     def self.zone_to_city(zone)
       return ZONES[zone] unless ZONES[zone].nil?
       MAPPING.keys.each do |city|
-        zone = zone.gsub(" ", "_")
         return MAPPING[city] if city.downcase == zone.to_s.downcase || city.downcase.include?("/" + zone.to_s.downcase)
       end
 
