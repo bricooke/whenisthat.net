@@ -26,6 +26,7 @@ module WhenIsThat
       "Boston" =>                                 "Eastern Time (US & Canada)"   ,
       "New York" =>                               "Eastern Time (US & Canada)"   ,
       "San Francisco" =>                          "Pacific Time (US & Canada)"   ,
+      "LA" =>                                     "Pacific Time (US & Canada)"   ,
       "SF" =>                                     "Pacific Time (US & Canada)"   ,
       "Austin" =>                                 "Central Time (US & Canada)"   ,
       "New Zealand" =>                            "Auckland"                     ,
